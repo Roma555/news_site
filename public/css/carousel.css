@@ -1,0 +1,118 @@
+.big-imagine{
+     height: 400px;
+}
+.small-imagine{
+     height: 200px;
+}
+
+.d-block-bg{ 
+/*width: 100%;*/
+    height: 400px;}
+
+.d-block-sm{ 
+/*width: 100%;*/
+    height: 200px;}
+
+.no-margin {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.carousel_caption_bgimg{
+left: 60px !important;
+}
+
+.carousel_caption_smimg{
+left: 20px !important;
+}
+
+.carousel-caption {
+    /*left: 30px;*/
+    padding-bottom: 0px; 
+}
+
+#background_1{background: green;}
+#background_2{background: orange;}
+#background_3{background: blue;}
+#background_4{background: yellow;}
+#background_5{background: pink;}
+
+.cat_of_news_bgimg{
+    /*text-align:left; */
+    /*background: green;*/
+    width: 100px;
+    padding: 0.5px;
+    margin: 5px;
+    border-radius:10px;
+    border: 1px solid black;
+}
+
+.name_of_news_bgimg{
+    /*background: grey;*/
+    /*opacity:0.5;*/
+    text-align:left;
+    padding-left: 10px;
+    margin: 0px;
+    /*width: 400px;*/
+}
+.data_of_news_bgimg{
+    display: block;
+    text-align: left;
+    padding-left: 10px;
+    color: #CCCCFF;
+}
+
+.cat_of_news_smimg{
+    /*text-align:left; */
+    background: green;
+    width: 90px;
+    padding: 0.5px;
+    margin: 5px;
+    border-radius:10px;
+    border: 1px solid black;
+}
+
+.name_of_news_smimg{
+    /*background: grey;*/
+    /*opacity:0.5;*/
+    text-align:left;
+    padding-left: 10px;
+    margin: 0px;
+    /*width: 400px;*/
+}
+.data_of_news_smimg{
+    display: block;
+    text-align: left;
+    padding-left: 10px;
+    color: #CCCCFF;
+    font-size: 12px;
+}
+
+.big-imagine:hover {
+opacity:0.7; /* FF, Opera, Safari, Chrome */
+/*filter: alpha (Opacity=70);!* прозрачность для IE *!*/
+}
+.small-imagine:hover {
+opacity:0.7; /* FF, Opera, Safari, Chrome */
+/*filter: alpha (Opacity=70);!* прозрачность для IE *!*/
+}
+
+.carousel-control-prev,.carousel-control-next {
+
+    z-index: 10;
+    top: 2%;
+    width: 30px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.carousel-control-prev,.carousel-control-next { background: none }
+/*change it according to your needs*/
+.carousel-control.left  { left: 195px; }
+.carousel-control.right { right: 195px; }
+
+.big-imagine a{
+    display: block; /* Ссылка как блочный элемент */
+}
+.small-imagine a{
+    display: block; /* Ссылка как блочный элемент */
+}

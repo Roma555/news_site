@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use Dotenv\Exception\ValidationException;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class LoginController extends Controller
+{
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+
+    use AuthenticatesUsers;
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/my/account';             //Переадресовуємося на /my/account
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
+
+    //моя функція логування
+    public function login(Request $request)
+    {
+        try{
+            $this->validate($request,[                  //пробуємо провести валідацію ;
+                'email' => 'required|min:3|max:255',    // обмеження по email від 3 символів до 255 ;
+                'password' => 'required|min:6'          // обмеження по password від 6 символів ;
+            ]);
+
+            $remember = $request->has('remember') ? true : false;     //перевірка чи нажатий checkbox з name="remember"
+            if(Auth::attempt(['email' => $request->input('email'),    //параметри по яким ми авторизовуємся
+                              'password' => $request->input('password')], $remember)){
+                return redirect(route('account'))->with('success', trans('messages.auth.successLogin'));
+            }
+            return back()->with('error', trans('messages.auth.errorLogin'));
+
+        }catch(ValidationException $e){
+            \Log::error($e->getMessage());                                         //для адміністратора сайту
+            return back()->with('error', trans('messages.auth.errorLogin'));
+        }
+    }
+}

@@ -1,0 +1,6 @@
+127.0.0.1:3000
+
+database:
+	DB_NAME=news_database
+	DB_USERNAME=root
+	DB_PASSWORD=
