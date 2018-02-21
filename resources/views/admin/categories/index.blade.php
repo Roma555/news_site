@@ -23,7 +23,7 @@
                 <td>{{$category->title}}</td>
                 <td>{!! $category->description !!}</td>
                 <td>{{$category->created_at->format('d-m-Y H:i')}}</td>
-                <td><a href="#">Редагувати</a> || <a href="#">Видалити</a></td>
+                <td><a href="{!! route('categories.edit',['id' => $category->id]) !!}">Редагувати</a> || <a href="#">Видалити</a></td>
             @endforeach
 
         </table>

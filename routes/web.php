@@ -41,8 +41,10 @@ Route::group(['middleware' => 'auth'],function(){  //встроєний в ла�
         Route::get('/categories/add', 'Admin\CategoriesController@addCategory')->name('categories.add'); // Сторінка адміна;
         Route::post('/categories/add', 'Admin\CategoriesController@addRequestCategory');                                       // Метод пост логування
 
-        Route::get('/categories/edit/{id}', 'Admin\CategoriesController@editCategory')->where('id','\d+')->name('categories.edit'); // Сторінка адміна;
-        Route::delete('/categories/delete', 'Admin\CategoriesController@deleteCategory')->name('categories.delete'); // Сторінка адміна;
+        Route::get('/categories/edit/{id}', 'Admin\CategoriesController@editCategory')->where('id','\d+')->name('categories.edit');
+        Route::post('/categories/edit/{id}', 'Admin\CategoriesController@editRequestCategory')->where('id','\d+');
+
+        Route::delete('/categories/delete', 'Admin\CategoriesController@deleteCategory')->name('categories.delete');
 
 });
 });
