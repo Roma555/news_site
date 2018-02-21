@@ -12,9 +12,9 @@ class CategoriesController extends Controller
 //====================================================================================================================//
     public function index()
     {
-//        $objCategory = new Category();
-//        $categories = $objCategory->get();
-//        return view('admin.categories.index', ['categories' => $categories]);
+        $objCategory = new Category();
+        $categories = $objCategory->get();
+        return view('admin.categories.index', ['categories' => $categories]);
     }
 //====================================================================================================================//
     public function addCategory()
