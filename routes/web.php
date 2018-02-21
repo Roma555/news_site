@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth'],function(){  //встроєний в ла�
         Route::get('/articles', 'Admin\ArticlesController@index')->name('articles'); // Сторінка rfntujhsq;
 
         Route::get('/articles/add', 'Admin\ArticlesController@addArticle')->name('articles.add');
-//        Route::post('/articles/add', 'Admin\ArticlesController@addRequestArticle');
+        Route::post('/articles/add', 'Admin\ArticlesController@addRequestArticle');
 
         Route::get('/articles/edit/{id}', 'Admin\ArticlesController@editArticle')->where('id','\d+')->name('articles.edit');
 //        Route::post('/articles/edit/{id}', 'Admin\ArticlesController@editRequestArticle')->where('id','\d+');
