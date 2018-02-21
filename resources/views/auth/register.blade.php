@@ -9,6 +9,9 @@
 
     <title>Registration</title>
 
+    <!-- Alertify core CSS -->
+    {{--<link href="{{ asset('css/alertify.css') }}" rel="stylesheet">--}}
+
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -42,5 +45,9 @@
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 </form>
 
+
+{{--<script src="{{ asset('js/alertify.js') }}"></script>--}}
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
+@include('inc.messages')
 </body>
 </html>

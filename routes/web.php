@@ -35,6 +35,9 @@ Route::group(['middleware' => 'auth'],function(){  //встроєний в ла�
     Route::group(['middleware' => 'admin'],function(){
         Route::get('/admin', 'Admin\AccountController@index')->name('admin'); // Сторінка адміна;
 
+        Route::get('/categories', 'Admin\CategoriesController@index')->name('categories'); // Сторінка адміна;
+        Route::get('/categories/add', 'Admin\CategoriesController@addCategory')->name('categories.add'); // Сторінка адміна;
+        Route::get('/categories/edit/{id}', 'Admin\CategoriesController@addCategory')->name('categories.add'); // Сторінка адміна;
     });
 });
 //********************************************************************************************************************//

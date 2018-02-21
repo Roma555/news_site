@@ -9,6 +9,9 @@
 
     <title>Login</title>
 
+    <!-- Alertify core CSS -->
+    {{--<link href="{{ asset('css/alertify.css') }}" rel="stylesheet">--}}
+
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -39,5 +42,9 @@
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 </form>
 
+
+{{--<script src="{{ asset('js/alertify.js') }}"></script>--}}
+<script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
+@include('inc.messages')
 </body>
 </html>
