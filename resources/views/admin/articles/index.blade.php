@@ -44,7 +44,7 @@
                         url: "{!! route('articles.delete') !!}",
                         data: {_token:"{{csrf_token()}}", id:id},
                         complete: function() {
-                            alert("Категорія новин видалена!");
+                            alert("Новина видалена!");
                             location.reload();
                         }
                     });

@@ -50,7 +50,7 @@ class ArticlesController extends Controller
                     'article_id'     =>  $objArticle->id
                 ]);
             }
-            return redirect()->route('articles')->with('succes','Новина успішно додана');
+            return redirect()->route('articles')->with('success','Новина успішно додана');
         }
         return back()->with('error','Невдалося добавити новину');
 
@@ -58,16 +58,51 @@ class ArticlesController extends Controller
 //====================================================================================================================//
     public function editArticle(int $id)
     {
+        $objCategory = new Category();
+        $categories = $objCategory ->get();
+        $objArticle = Article::find($id);
+        if(!$objArticle){
+            return abort('404');
+        }
+        return view('admin.articles.edit',[
+            'categories'  => $categories,
+            'article'     => $objArticle
+        ]);
     }
 
 //====================================================================================================================//
 //обробник події на кнопку edit
     public function editRequestArticle(Request $request,int $id)
     {
+        $objArticle = Article::find($id);
+        if(!$objArticle){
+            return abort('404');
+        }
+
+        $objArticle->title = $request->input('title');
+        $objArticle->short_description = $request->input('short_description');
+        $objArticle->full_description = $request->input('full_description');
+        $objArticle->author = $request->input('author');
+        $objArticle->keywords = $request->input('keywords');
+
+        if($objArticle->save()){
+            return redirect()->route('articles')->with('success','Новина успішно відредагована');
+        }
+
+        return back()->with('error','Невдалося відредагувати новину');
     }
 //====================================================================================================================//
     public function deleteArticle(Request $request)
     {
+        if($request->ajax()){
+            $id = (int)$request->input('id');
+            $objCategory = new Article();
+
+            $objCategory->where('id',$id)->delete();
+
+            echo "success";
+        }
+
     }
 //====================================================================================================================//
 }
