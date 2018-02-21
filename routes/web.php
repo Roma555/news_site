@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'],function(){  //встроєний в ла�
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'],function(){
         Route::get('/', 'Admin\AccountController@index')->name('admin'); // Сторінка адміна;
 
+        /*******************************         Categories          *****************************************/
         Route::get('/categories', 'Admin\CategoriesController@index')->name('categories'); // Сторінка rfntujhsq;
 
         Route::get('/categories/add', 'Admin\CategoriesController@addCategory')->name('categories.add'); // Сторінка адміна;
@@ -45,6 +46,17 @@ Route::group(['middleware' => 'auth'],function(){  //встроєний в ла�
         Route::post('/categories/edit/{id}', 'Admin\CategoriesController@editRequestCategory')->where('id','\d+');
 
         Route::delete('/categories/delete', 'Admin\CategoriesController@deleteCategory')->name('categories.delete');
+
+        /********************************         Articles           *****************************************/
+        Route::get('/articles', 'Admin\ArticlesController@index')->name('articles'); // Сторінка rfntujhsq;
+
+        Route::get('/articles/add', 'Admin\ArticlesController@addArticle')->name('articles.add');
+//        Route::post('/articles/add', 'Admin\ArticlesController@addRequestArticle');
+
+        Route::get('/articles/edit/{id}', 'Admin\ArticlesController@editArticle')->where('id','\d+')->name('articles.edit');
+//        Route::post('/articles/edit/{id}', 'Admin\ArticlesController@editRequestArticle')->where('id','\d+');
+
+        Route::delete('/articles/delete', 'Admin\ArticlesController@deleteArticle')->name('articles.delete');
 
 });
 });
