@@ -35,7 +35,7 @@ class CategoriesController extends Controller
                 'description' => $request->input('description')
             ]);
             if($objCategory){
-                return back()->with('success','Категорія успішно добавлена');
+                return redirect()->route('categories')->with('success','Категорія успішно добавлена');
             }
             return back()->with('error','Не вдалося добавити категорію');
 //            dd($request->all());
@@ -88,7 +88,12 @@ class CategoriesController extends Controller
     public function deleteCategory(Request $request)
     {
         if($request->ajax()){
+            $id = (int)$request->input('id');
+            $objCategory = new Category();
 
+            $objCategory->where('id',$id)->delete();
+
+            echo "success";
         }
 
     }

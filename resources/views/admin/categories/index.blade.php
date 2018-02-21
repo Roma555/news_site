@@ -19,14 +19,39 @@
             </tr>
 
             @foreach($categories as $category)
-                <td>{{$category->id}}</td>
-                <td>{{$category->title}}</td>
-                <td>{!! $category->description !!}</td>
-                <td>{{$category->created_at->format('d-m-Y H:i')}}</td>
-                <td><a href="{!! route('categories.edit',['id' => $category->id]) !!}">Редагувати</a> || <a href="#">Видалити</a></td>
+                <tr>
+                    <td>{{$category->id}}</td>
+                    <td>{{$category->title}}</td>
+                    <td>{!! $category->description !!}</td>
+                    <td>{{$category->created_at->format('d-m-Y H:i')}}</td>
+                    <td><a href="{!! route('categories.edit',['id' => $category->id]) !!}">Редагувати</a>/
+                        <a href="javascript:;" class="delete" rel="{{$category->id}}">Видалити</a></td>
+                </tr>
             @endforeach
 
         </table>
     </main>
     <!-- ========================================== END Content ===================================================== -->
+@endsection
+@section('js')
+    <script>
+        $(function(){
+            $(".delete").on('click', function () {
+                if(confirm("Ви впевнені що хочете видалити запис?")) {
+                    let id = $(this).attr("rel");
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{!! route('categories.delete') !!}",
+                        data: {_token:"{{csrf_token()}}", id:id},
+                        complete: function() {
+                            alert("Категорія новин видалена!");
+                            location.reload();
+                        }
+                    });
+                }else{
+                    alertify.error("Подія відмінена користувачем");
+                }
+            });
+        });
+    </script>
 @endsection
