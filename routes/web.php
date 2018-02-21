@@ -31,14 +31,20 @@ Route::group(['middleware' => 'guest'],function(){  //встроєний в ла
 Route::group(['middleware' => 'auth'],function(){  //встроєний в ларавел middleware який перевіряє авторизований користувач чи ні;
     Route::get('/my/account', 'AccountController@index')->name('account'); // Сторінка акаунта(кабінет);
     Route::get('/logout', function(){\Auth::logout(); return redirect(route('login'));}) -> name('logout'); // Вихід з акаунта(кабінета);
-//Група адміністратора (під групою зареєстрованих користувачів):
-    Route::group(['middleware' => 'admin'],function(){
-        Route::get('/admin', 'Admin\AccountController@index')->name('admin'); // Сторінка адміна;
 
-        Route::get('/categories', 'Admin\CategoriesController@index')->name('categories'); // Сторінка адміна;
+//Група адміністратора (під групою зареєстрованих користувачів):
+    Route::group(['middleware' => 'admin', 'prefix' => 'admin'],function(){
+        Route::get('/', 'Admin\AccountController@index')->name('admin'); // Сторінка адміна;
+
+        Route::get('/categories', 'Admin\CategoriesController@index')->name('categories'); // Сторінка rfntujhsq;
+
         Route::get('/categories/add', 'Admin\CategoriesController@addCategory')->name('categories.add'); // Сторінка адміна;
-        Route::get('/categories/edit/{id}', 'Admin\CategoriesController@addCategory')->name('categories.add'); // Сторінка адміна;
-    });
+        Route::post('/categories/add', 'Admin\CategoriesController@addRequestCategory');                                       // Метод пост логування
+
+        Route::get('/categories/edit/{id}', 'Admin\CategoriesController@editCategory')->where('id','\d+')->name('categories.edit'); // Сторінка адміна;
+        Route::delete('/categories/delete', 'Admin\CategoriesController@deleteCategory')->name('categories.delete'); // Сторінка адміна;
+
+});
 });
 //********************************************************************************************************************//
 //Група адміністратора:
