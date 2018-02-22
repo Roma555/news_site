@@ -65,11 +65,17 @@ class ArticlesController extends Controller
             return abort('404');
         }
 
-        dd($objArticle->categories);
+        $mainCategories = $objArticle -> categories;
+        $arrCategories = [];
+        foreach($mainCategories as $category){
+            $arrCategories[] = $category->id;
+        }
+//        dd($arrCategories);
 
         return view('admin.articles.edit',[
-            'categories'  => $categories,
-            'article'     => $objArticle
+            'categories'      => $categories,
+            'article'         => $objArticle,
+            'arrCategories'  => $arrCategories
         ]);
     }
 
@@ -89,6 +95,19 @@ class ArticlesController extends Controller
         $objArticle->keywords = $request->input('keywords');
 
         if($objArticle->save()){
+            //Обновляэмо прив'язку категорій
+            $objArticleCategory = new CategoryArticle();
+            $objArticleCategory->where('article_id',$objArticle->id)->delete();   //видаляємо всі записи в таблиці category_articles в яких article_id збігається із id статі яку ми редагуєм
+
+            $arrCategories = $request->input('categories');   //отримуємо масив всіх категорій 'categories' з edit.blade.php
+            if(is_array($arrCategories)){                          // перевірка чи то масив
+                foreach ($arrCategories as $category){
+                    $objArticleCategory->create([
+                        'category_id' => $category,
+                        'article_id'  => $objArticle->id
+                    ]);
+                }
+            }
             return redirect()->route('articles')->with('success','Новина успішно відредагована');
         }
 

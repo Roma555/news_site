@@ -12,7 +12,7 @@
             {!! csrf_field() !!}
             <p> Вибір категорії(-ій): <br><select name="categories[]" class="form-control" multiple >
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->title}}</option>
+                        <option value="{{$category->id}}" @if(in_array($category->id, $arrCategories)) selected @endif>{{$category->title}}</option>
                     @endforeach
                 </select></p>
             <p> Введіть назву новини: <br><input type="text" name="title" value="{{$article->title}}" class="form-control" required></p>
