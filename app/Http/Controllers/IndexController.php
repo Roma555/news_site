@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entities\Article;
+//use App\Entities\User;
 
 class IndexController extends Controller
 {
@@ -33,12 +34,13 @@ class IndexController extends Controller
 //        $articles = Article::all(); //звертаємся до класу Article в моделях і викликаємо статичний метод all() який
 //                                    // повертає вибірку всіх записів в таблиці з якою працює дана модель Article
 
-        $articles = Article::select('id','title','short_description')->get(); //звертаємся до класу Article в моделях і викликаємо
+//        $articles = Article::select('id','title','short_description')->get(); //звертаємся до класу Article в моделях і викликаємо
                                                                  //метод конструктора запитів select('назва_поля','','')
                                                                  //який вказує які елементи(поля) будуть вибрані з таблиці
                                                                  //і метод get() який завершує формування запиту(цей
                                                                  //метод також повертає колекцію моделей вибраних елементів)
 //        dump($articles); // Вбудована функція хелпер фреймворка(роздруковує вміст масивів, обєктів і так далі)
+        $articles = Article::paginate(1);
 
         return view('home_page')->with(['header'=>$this->header,
                                           'message'=>$this->message,

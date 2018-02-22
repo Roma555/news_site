@@ -8,7 +8,7 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <h1>Додати Новину</h1>
         <br>
-        <form method="post">
+        <form method="post" <!--enctype="multipart/form-data"-->>
             {!! csrf_field() !!}
             <p> Вибір категорії(ій): <br><select name="categories[]" class="form-control" multiple >
                     @foreach($categories as $category)
@@ -20,6 +20,7 @@
             <p> Короткий опис новини: <br><textarea name="short_description" class="form-control"></textarea></p>
             <p> Повний опис новини: <br><textarea name="full_description" class="form-control"></textarea></p>
             <p> Введіть ключові слова: <br><input type="text" name="keywords" class="form-control" required></p>
+            {{--<p> Виберіть зображення: <br><input type="file" name="image"></p>--}}
             <button type="submit" class="btn btn-success" style="cursor: pointer; float: right;">Додати</button>
             <br><br><br>
         </form>
