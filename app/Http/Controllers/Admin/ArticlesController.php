@@ -64,6 +64,9 @@ class ArticlesController extends Controller
         if(!$objArticle){
             return abort('404');
         }
+
+        dd($objArticle->categories);
+
         return view('admin.articles.edit',[
             'categories'  => $categories,
             'article'     => $objArticle
@@ -72,7 +75,7 @@ class ArticlesController extends Controller
 
 //====================================================================================================================//
 //обробник події на кнопку edit
-    public function editRequestArticle(Request $request,int $id)
+    public function editRequestArticle(ArticleRequest $request,int $id)
     {
         $objArticle = Article::find($id);
         if(!$objArticle){
