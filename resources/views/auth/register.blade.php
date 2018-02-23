@@ -20,32 +20,38 @@
 </head>
 
 <body class="text-center">
-
+<div class="row">
+{{--================================================================================================================--}}
 <form class="form-signin" method="POST">
     {!! csrf_field() !!}
-    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <img class="mb-4" src="{{ asset('img/logo_register_or_login.jpg') }}" alt="" width="120" height="120">
 
-    <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
+    <h1 class="h3 mb-3 font-weight-normal">Реєстрація</h1>
 
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputEmail" class="sr-only">Введіть e-mail</label>
+    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Введіть e-mail" required autofocus>
 
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+    <label for="inputPassword" class="sr-only">Введіть пароль</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Введіть пароль" required>
 
-    <label for="inputPassword" class="sr-only">Confirm password</label>
-    <input type="password" id="inputPassword" name="password_confirmation" class="form-control" placeholder="Confirm password" required>
+    <label for="inputPassword" class="sr-only">Підтвердіть пароль</label>
+    <input type="password" id="inputPassword" name="password_confirmation" class="form-control" placeholder="Підтвердіть пароль" required>
 
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" name="remember" value="1"> Remember
-        </label>
+            <input type="checkbox" name="remember" value="1"> Одразу ввійти у профіль
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Зареєструватися</button>
 </form>
-
-
+{{--================================================================================================================--}}
+<div class="form-signin">
+    <form  method="LINK" action="{{ 'login'}}">Ви вже зареєстровані?
+        {{--<input type="submit" value="Увійти" class="btn btn-sm btn-outline-secondary">--}}
+        <a class="text-primary"  href="{{ 'login'}}">Увійти</a>
+    </form>
+</div>
+{{--================================================================================================================--}}
+</div>
 {{--<script src="{{ asset('js/alertify.js') }}"></script>--}}
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/alertify.min.js"></script>
 @include('inc.messages')
