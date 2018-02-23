@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Category;
 use Illuminate\Http\Request;
 use App\Entities\Article;
 //use App\Entities\User;
@@ -40,7 +41,11 @@ class IndexController extends Controller
                                                                  //і метод get() який завершує формування запиту(цей
                                                                  //метод також повертає колекцію моделей вибраних елементів)
 //        dump($articles); // Вбудована функція хелпер фреймворка(роздруковує вміст масивів, обєктів і так далі)
-        $articles = Article::paginate(1);
+        $objArticles = new Article();
+        $objCategory = new Category();
+
+        $articles= $objArticles->orderBy('id','desc')->paginate(4);
+//        $articles = Article::paginate(1);
 
         return view('home_page')->with(['header'=>$this->header,
                                           'message'=>$this->message,
@@ -49,12 +54,17 @@ class IndexController extends Controller
                                                                    // в resources-> views-> home_page.blade.php
     }
 
-    public function  show($id){
-        $article = Article::select('id','title','full_description','created_at')->where('id',$id)->first();
+    public function  show($id, $slug){
+        $objarticle = Article::find($id);
+        if(!$objarticle){
+            return abort("404");
+        }
+
+//        $article = Article::select('id','title','full_description','created_at')->where('id',$id)->first();
 //        dump($article);
         return view('article-content')->with(['message'=>$this->message,
                                                     'content'=>$this->content,
-                                                    'article'=>$article]); //предаємо декілька зміних черезмасив [ключ => зміна]
+                                                    'article'=>$objarticle]); //предаємо декілька зміних черезмасив [ключ => зміна]
                                                                              // в resources-> views-> article-content.blade.php
     }
 

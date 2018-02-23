@@ -247,19 +247,25 @@
             <div class="card flex-md-row mb-4 box-shadow h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">
                     <strong class="d-inline-block mb-2 text-primary">World</strong>
+                    <div class="mb-1 text-muted">{{ $article->author }}</div>
                     <h5 class="mb-0">
                         <a class="text-dark" href="#">{{ $article->title }}</a>  {{--отримуєм доступ до ячейки title таблиці article--}}
                     </h5>
-                    <div class="mb-1 text-muted">Nov 12</div>
-                    <p class="card-text mb-auto">{{ $article->short_description }}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
-                    <a href="{{ route('articleShow',['id'=>$article->id]) }}">Continue reading</a>
+                    <div class="mb-1 text-muted">{{ $article->created_at->format('d-m-Y H:i') }}</div>
+                    <p class="card-text mb-auto">{!! $article->short_description !!}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
+                    <a href="{{ route('articleShow',['id'=>$article->id,'slug' =>str_slug($article->title)]) }}">Продовжити читати...</a>
                 </div>
                 <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
             </div>
         </div>
     @endforeach
     </div>
-    {{ $articles->links() }}
+    <div class="text-center">
+    <div >
+        {{--пагинция для кількостс татей--}}
+        {{ $articles->links() }}
+    </div>
+    </div>
 </div>
 
 

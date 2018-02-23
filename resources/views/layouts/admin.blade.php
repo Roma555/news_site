@@ -21,7 +21,7 @@
 <body>
 <!-- ==================================== Header Navbar ============================================================ -->
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin">Панель Управління</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{!! route('admin') !!}">Панель Управління</a>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -39,9 +39,9 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link " href="{!! route('admin') !!}">
                             <span data-feather="home"></span>
-                            Головна <span class="sr-only">(current)</span>
+                            Головна <span class="sr-only"></span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -52,12 +52,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{!! route('articles') !!}">
-                            <span data-feather="shopping-cart"></span>
+                            <span data-feather="layers"></span>
                             Новини
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{!! route('users') !!}">
                             <span data-feather="users"></span>
                             Користувачі
                         </a>
@@ -66,12 +66,6 @@
                         <a class="nav-link" href="#">
                             <span data-feather="bar-chart-2"></span>
                             Коментарії
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="layers"></span>
-                            додати потім
                         </a>
                     </li>
                 </ul>
