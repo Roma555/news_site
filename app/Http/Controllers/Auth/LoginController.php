@@ -53,7 +53,7 @@ class LoginController extends Controller
             $remember = $request->has('remember') ? true : false;     //перевірка чи нажатий checkbox з name="remember"
             if(Auth::attempt(['email' => $request->input('email'),    //параметри по яким ми авторизовуємся
                               'password' => $request->input('password')], $remember)){
-                return redirect(route('account'))->with('success', trans('messages.auth.successLogin'));
+                return redirect(route('home'))->with('success', trans('messages.auth.successLogin'));
             }
             return back()->with('error', trans('messages.auth.errorLogin'));
 

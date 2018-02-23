@@ -60,6 +60,7 @@ class RegisterController extends Controller
         }
         if($isAuth){           //перевірка чи поставлена галочка аутинфікувати користувача після реєстрації
             $this->guard()->login($objUser);
+
         }
 //        event(new Registered($user = $this->create($request->all())));
 //        $this->guard()->login($user);
