@@ -17,7 +17,7 @@
 //Формуємо запити типу get
 Route::get('/', 'IndexController@index')->name('home');   // Голоана сторінка сайту новин
 Route::get('article/{id}/{slug}', 'IndexController@show')->name('articleShow');   // Сторінка з новиною(динамічна звязка з новиною через id)
-Route::get('news/{id}', 'IndexController@find_by_cat')->name('newsCat');
+Route::get('news/{idcat}', 'IndexController@find_by_cat')->name('newsCat');
 //********************************************************************************************************************//
 //Група гостів (не зареєстрованих користувачів):
 Route::group(['middleware' => 'guest'],function(){  //встроєний в ларавел middleware який перевіряє авторизований користувач чи ні;

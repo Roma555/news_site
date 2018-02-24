@@ -261,10 +261,10 @@
     @endforeach
     </div>
     <div class="text-center">
-    <div >
-        {{--пагинция для кількостс татей--}}
-        {{ $articles->links() }}
-    </div>
+        <div >
+            {{--пагинция для кількостс татей--}}
+            {{ $articles->links() }}
+        </div>
     </div>
 </div>
 

@@ -62,19 +62,23 @@ class IndexController extends Controller
         if(!$objarticle){
             return abort("404");
         }
+        $objCategory1 = new Category();
+        $categories = $objCategory1->select('id','title')->get();
 
 //        $article = Article::select('id','title','full_description','created_at')->where('id',$id)->first();
 //        dump($article);
         return view('article-content')->with(['message'=>$this->message,
                                                     'content'=>$this->content,
-                                                    'article'=>$objarticle]); //предаємо декілька зміних черезмасив [ключ => зміна]
+                                                    'article'=>$objarticle,
+                                                    'categories'=>$categories
+                                                        ]); //предаємо декілька зміних черезмасив [ключ => зміна]
                                                                              // в resources-> views-> article-content.blade.php
     }
 
 
-    public function find_by_cat($id)
+    public function find_by_cat($idcat)
     {
-        $category = Category::find($id);
+        $category = Category::find($idcat);
         $articles_cat = $category->articles;
 //        dd($articles_cat);
 
