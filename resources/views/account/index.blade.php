@@ -4,6 +4,7 @@
 
 <h2> Ласкаво просимо, {{\Auth::user()->email}}</h2>
 <br>
+<a class="btn btn-sm btn-outline-secondary" href="{{ route('home') }}"> Головна сторінка</a><br>
 @if(\Auth::user()->isAdmin ==1)
     <a class="btn btn-sm btn-outline-secondary" href="{{ route('admin') }}"> Зайти в адмін панель</a><br>
 @endif

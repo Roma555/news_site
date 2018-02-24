@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Category;
+use App\Entities\CategoryArticle;
 use Illuminate\Http\Request;
 use App\Entities\Article;
 //use App\Entities\User;
@@ -44,13 +45,15 @@ class IndexController extends Controller
         $objArticles = new Article();
         $objCategory = new Category();
 
+        $categories = $objCategory->select('id','title')->get();
         $articles= $objArticles->orderBy('id','desc')->paginate(4);
 //        $articles = Article::paginate(1);
 
         return view('home_page')->with(['header'=>$this->header,
                                           'message'=>$this->message,
                                           'content'=>$this->content,
-                                          'articles'=>$articles]); //предаємо декілька зміних черезмасив [ключ => зміна]
+                                          'articles'=>$articles,
+                                          'categories'=>$categories]); //предаємо декілька зміних черезмасив [ключ => зміна]
                                                                    // в resources-> views-> home_page.blade.php
     }
 
@@ -69,4 +72,16 @@ class IndexController extends Controller
     }
 
 
+    public function find_by_cat($id)
+    {
+        $category = Category::find($id);
+        $articles_cat = $category->articles;
+//        dd($articles_cat);
+
+        $objCategory1 = new Category();
+        $categories = $objCategory1->select('id','title')->get();
+
+        return view('art_by_cat')->with(['articles_cat'=>$articles_cat,
+                                                'categories'=>$categories]);
+    }
 }

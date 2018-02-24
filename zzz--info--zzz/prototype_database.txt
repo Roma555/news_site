@@ -1,45 +1,37 @@
 ==========================================================================
+=                           База даних                                   =
+==========================================================================
 (список категорій)
 -categories:
-	id;
-	title;
-	description;
-	timestamp;(дата зміни/створення)
+	id;                                   [increments]
+	title;                                [string]
+	description;                          [text]
+	timestamp;(дата зміни/створення)      [timestamps]
 ==========================================================================
 (список користувачів)
 -users:
-	id;
-	emails;
-	password;
-	isAdmin;
-	timestamp;(дата зміни/створення)
+	id;                                   [increments]
+	email;                                [string]
+	password;                             [string]
+	isAdmin;                              [tinyInteger]
+	timestamp;(дата зміни/створення)      [timestamps]
 ==========================================================================
 (список статей)
 articles:
-	id;
-	title;
-	description;
-	short_description;
-	full_description;
-	author;
-	timestamp(дата зміни/створення)
+	id;                                   [increments]
+	title;                                [string]
+	description;                          [text]
+	short_description;                    [text]
+	full_description;                     [text]
++	keywords;                             [string]
+	author;                               [string]
++	images;                               [string]
+	timestamp(дата зміни/створення)       [timestamps]
 ==========================================================================
 (список стетей з декількома категоріями)[один-до-багатьох]
 article_categories:
-	id;
-	category_id;
-	article_id;
-	
-==========================================================================
-slider_artecles:
-	id;
-	title;
-
-==========================================================================
-politics_news:
-	id
-==========================================================================
-economic_ews:
-==========================================================================
-sport_news:
+	id;                                   [increments]
+	category_id;                          [integer]
+	article_id;                           [integer]
+	timestamp(дата зміни/створення)       [timestamps]
 ==========================================================================

@@ -34,7 +34,7 @@
                 @endif
             </div>
             <div class="col-4 text-center">
-                <a class="blog-header-logo text-dark" href="#">RomaNews</a>               <!-- Name of News Portall -->
+                <a class="blog-header-logo text-dark" href="{{asset('/')}}">RomaNews</a>               <!-- Name of News Portall -->
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <a class="text-muted" href="#">
@@ -57,18 +57,20 @@
 <div class="container">
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-            <a class="p-2 text-muted" href="#">Політика</a>
-            <a class="p-2 text-muted" href="#">Економіка</a>
-            <a class="p-2 text-muted" href="#">Мистецтво</a>
-            <a class="p-2 text-muted" href="#">Спорт</a>
-            <a class="p-2 text-muted" href="#">Культура</a>
-            <a class="p-2 text-muted" href="#">Бізнес</a>
-            <a class="p-2 text-muted" href="#">Наука</a>
-            <a class="p-2 text-muted" href="#">Здоров'я</a>
-            <a class="p-2 text-muted" href="#">Відпочинок</a>
-            <a class="p-2 text-muted" href="#">Комп'ютер</a>
-            <a class="p-2 text-muted" href="#">Злочини</a>
-            <a class="p-2 text-muted" href="#">Погода</a>
+            @foreach($categories as $category)
+            <a class="p-2 text-muted" href="{{route('newsCat', ['id'=>$category->id])}}">{{ $category->title }}</a>
+            @endforeach
+            {{--<a class="p-2 text-muted" href="#">Економіка</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Мистецтво</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Спорт</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Культура</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Бізнес</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Наука</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Здоров'я</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Відпочинок</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Комп'ютер</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Злочини</a>--}}
+            {{--<a class="p-2 text-muted" href="#">Погода</a>--}}
         </nav>
     </div>
 </div>
