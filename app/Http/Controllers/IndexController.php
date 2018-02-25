@@ -76,9 +76,9 @@ class IndexController extends Controller
     }
 
 
-    public function find_by_cat($idcat)
+    public function find_by_cat($id_cat, $slug_cat)
     {
-        $category = Category::find($idcat);
+        $category = Category::find($id_cat);
         $articles_cat = $category->articles;
 //        dd($articles_cat);
 
