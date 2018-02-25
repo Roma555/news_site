@@ -22,7 +22,13 @@
                         </h3>
                         <div class="mb-1 text-muted">{{ $article->created_at }}</div>
                         <p class="card-text mb-auto">{{ $article->full_description }}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
-
+            <div class="col-10 pt-1">
+                <p>Категорія(-ї) новини:
+                        @foreach($category_of_news as $category_of_new)
+                    <a class="btn btn-sm btn-outline-secondary" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{ $category_of_new->title}}</a>
+                        @endforeach
+                </p>
+            </div>
         @endif
     </div>
 

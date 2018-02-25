@@ -10,14 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::get('/', function() { return view('welcome');});
-//Route::get('/page', function() {return "Hello World cherez function in web!!!!";});
-
 //********************************************************************************************************************//
 //Формуємо запити типу get
 Route::get('/', 'IndexController@index')->name('home');   // Голоана сторінка сайту новин
 Route::get('article/{id}/{slug}', 'IndexController@show')->name('articleShow');   // Сторінка з новиною(динамічна звязка з новиною через id)
-Route::get('category/{id_cat}/{slug_cat}', 'IndexController@find_by_cat')->name('categoryFilter');
+Route::get('category/{id_cat}/{slug_cat}', 'IndexController@find_by_cat')->name('categoryFilter'); // Сторінка з новинами вибраної категорії
 //********************************************************************************************************************//
 //Група гостів (не зареєстрованих користувачів):
 Route::group(['middleware' => 'guest'],function(){  //встроєний в ларавел middleware який перевіряє авторизований користувач чи ні;
@@ -38,35 +35,28 @@ Route::group(['middleware' => 'auth'],function(){  //встроєний в ла�
         Route::get('/', 'Admin\AccountController@index')->name('admin'); // Сторінка адміна;
 
         /*******************************         Categories          *****************************************/
-        Route::get('/categories', 'Admin\CategoriesController@index')->name('categories'); // Сторінка rfntujhsq;
+        Route::get('/categories', 'Admin\CategoriesController@index')->name('categories'); // Сторінка перегляду категорій в адмінці;
 
-        Route::get('/categories/add', 'Admin\CategoriesController@addCategory')->name('categories.add'); // Сторінка адміна;
-        Route::post('/categories/add', 'Admin\CategoriesController@addRequestCategory');                                       // Метод пост логування
+        Route::get('/categories/add', 'Admin\CategoriesController@addCategory')->name('categories.add'); // Сторінка адміна
+        Route::post('/categories/add', 'Admin\CategoriesController@addRequestCategory');                 // додачі категорії;
 
-        Route::get('/categories/edit/{id}', 'Admin\CategoriesController@editCategory')->where('id','\d+')->name('categories.edit');
-        Route::post('/categories/edit/{id}', 'Admin\CategoriesController@editRequestCategory')->where('id','\d+');
+        Route::get('/categories/edit/{id}', 'Admin\CategoriesController@editCategory')->where('id','\d+')->name('categories.edit'); // Сторінка адміна
+        Route::post('/categories/edit/{id}', 'Admin\CategoriesController@editRequestCategory')->where('id','\d+');            // редагування категорії;
 
-        Route::delete('/categories/delete', 'Admin\CategoriesController@deleteCategory')->name('categories.delete');
+        Route::delete('/categories/delete', 'Admin\CategoriesController@deleteCategory')->name('categories.delete');// Сторінка адміна видалення категорії
 
         /********************************         Articles           *****************************************/
-        Route::get('/articles', 'Admin\ArticlesController@index')->name('articles'); // Сторінка rfntujhsq;
+        Route::get('/articles', 'Admin\ArticlesController@index')->name('articles'); // Сторінка перегляду статей в адмінці;
 
-        Route::get('/articles/add', 'Admin\ArticlesController@addArticle')->name('articles.add');
-        Route::post('/articles/add', 'Admin\ArticlesController@addRequestArticle');
+        Route::get('/articles/add', 'Admin\ArticlesController@addArticle')->name('articles.add'); // Сторінка адміна
+        Route::post('/articles/add', 'Admin\ArticlesController@addRequestArticle');               // додачі новини;
 
-        Route::get('/articles/edit/{id}', 'Admin\ArticlesController@editArticle')->where('id','\d+')->name('articles.edit');
-        Route::post('/articles/edit/{id}', 'Admin\ArticlesController@editRequestArticle')->where('id','\d+');
+        Route::get('/articles/edit/{id}', 'Admin\ArticlesController@editArticle')->where('id','\d+')->name('articles.edit'); // Сторінка адміна
+        Route::post('/articles/edit/{id}', 'Admin\ArticlesController@editRequestArticle')->where('id','\d+');               // редагування новини;
 
-        Route::delete('/articles/delete', 'Admin\ArticlesController@deleteArticle')->name('articles.delete');
+        Route::delete('/articles/delete', 'Admin\ArticlesController@deleteArticle')->name('articles.delete'); // Сторінка адміна видалення новини
 
         /********************************         Users           *****************************************/
-        Route::get('/users', 'Admin\UsersController@index')->name('users');
+        Route::get('/users', 'Admin\UsersController@index')->name('users');   // Сторінка перегляду користувачів в адмінці;
+    });
 });
-});
-//********************************************************************************************************************//
-//Група адміністратора:
-//Route::group(['middleware' => 'admin'],function(){
-//    Route::get('/admin', 'Admin\AccountController@index')->name('admin'); // Сторінка адміна;
-//
-//});
-//********************************************************************************************************************//

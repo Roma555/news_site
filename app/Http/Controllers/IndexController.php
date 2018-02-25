@@ -47,8 +47,7 @@ class IndexController extends Controller
 
         $categories = $objCategory->select('id','title')->get();
         $articles= $objArticles->orderBy('id','desc')->paginate(4);
-//        $articles = Article::paginate(1);
-
+//        dd($articles);
         return view('home_page')->with(['header'=>$this->header,
                                           'message'=>$this->message,
                                           'content'=>$this->content,
@@ -58,6 +57,7 @@ class IndexController extends Controller
     }
 
     public function  show($id, $slug){
+
         $objarticle = Article::find($id);
         if(!$objarticle){
             return abort("404");
@@ -65,11 +65,14 @@ class IndexController extends Controller
         $objCategory1 = new Category();
         $categories = $objCategory1->select('id','title')->get();
 
+        $category_of_news = $objarticle->categories;    //відповідні категорій статті
+
 //        $article = Article::select('id','title','full_description','created_at')->where('id',$id)->first();
 //        dump($article);
         return view('article-content')->with(['message'=>$this->message,
                                                     'content'=>$this->content,
                                                     'article'=>$objarticle,
+                                                    'category_of_news'=>$category_of_news,
                                                     'categories'=>$categories
                                                         ]); //предаємо декілька зміних черезмасив [ключ => зміна]
                                                                              // в resources-> views-> article-content.blade.php
