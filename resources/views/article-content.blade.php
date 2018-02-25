@@ -18,10 +18,10 @@
         @if($article)
 
                         <h3 class="mb-0">
-                            <a class="text-dark" href="#">{{ $article->title }}</a>  {{--отримуєм доступ до ячейки title таблиці article--}}
+                            <a class="text-dark" href="#">{!! $article->title !!}</a>  {{--отримуєм доступ до ячейки title таблиці article--}}
                         </h3>
-                        <div class="mb-1 text-muted">{{ $article->created_at }}</div>
-                        <p class="card-text mb-auto">{{ $article->full_description }}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
+                        <div class="mb-1 text-muted">{!! $article->created_at !!}</div>
+                        <p class="card-text mb-auto">{!! $article->full_description !!}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
             <div class="col-10 pt-1">
                 <p>Категорія(-ї) новини:
                         @foreach($category_of_news as $category_of_new)

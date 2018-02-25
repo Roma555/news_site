@@ -246,7 +246,11 @@
         <div class="col-md-6">
             <div class="card flex-md-row mb-4 box-shadow h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">
-                    <strong class="d-inline-block mb-2 text-primary">World</strong>
+                    <strong class="d-inline-block mb-2 text-primary">
+                        @foreach( $article->categories as $category_of_new)
+                            <a class="btn btn-sm btn-outline-secondary" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{ $category_of_new->title}}</a>
+                        @endforeach
+                    </strong>
                     <div class="mb-1 text-muted">{{ $article->author }}</div>
                     <h5 class="mb-0">
                         <a class="text-dark" href="#">{{ $article->title }}</a>  {{--отримуєм доступ до ячейки title таблиці article--}}

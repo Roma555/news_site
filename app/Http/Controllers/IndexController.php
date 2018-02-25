@@ -42,12 +42,10 @@ class IndexController extends Controller
                                                                  //і метод get() який завершує формування запиту(цей
                                                                  //метод також повертає колекцію моделей вибраних елементів)
 //        dump($articles); // Вбудована функція хелпер фреймворка(роздруковує вміст масивів, обєктів і так далі)
-        $objArticles = new Article();
         $objCategory = new Category();
 
+        $articles = Article::with('categories')->orderBy('id','desc')->paginate(4);
         $categories = $objCategory->select('id','title')->get();
-        $articles= $objArticles->orderBy('id','desc')->paginate(4);
-//        dd($articles);
         return view('home_page')->with(['header'=>$this->header,
                                           'message'=>$this->message,
                                           'content'=>$this->content,
@@ -81,9 +79,15 @@ class IndexController extends Controller
 
     public function find_by_cat($id_cat, $slug_cat)
     {
-        $category = Category::find($id_cat);
-        $articles_cat = $category->articles;
+//        $category = Category::find($id_cat);
+//        $articles_cat = $category->articles;
+
+
+        $articles_cat = Category::with('articles')->where('id',$id_cat )->get();
+
+
 //        dd($articles_cat);
+
 
         $objCategory1 = new Category();
         $categories = $objCategory1->select('id','title')->get();
