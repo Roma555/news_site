@@ -9,7 +9,6 @@
     @foreach($articles_cat as $article1_cat)
             {{--{{$article1_cat}}--}}
             @foreach($article1_cat->articles as $article_cat)
-            {{--{{$article_cat->articles}}--}}
 
 
 
@@ -18,8 +17,16 @@
             <div class="card flex-md-row mb-4 box-shadow h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">
                     <strong class="d-inline-block mb-2 text-primary">
-                        <a class="btn btn-sm btn-outline-secondary" href="{{route('categoryFilter', ['id_cat'=>$article1_cat->id,'slug_cat' =>str_slug($article1_cat->title)])}}">{{$article1_cat->title}}</a>
-                        {{--{{$article1_cat->title}}World--}}
+                        @foreach($article_cat->categories as $article_categories)
+                            <a class="btn btn-sm btn-outline-secondary" href="{{route('categoryFilter', ['id_cat'=>$article_categories->id,'slug_cat' =>str_slug($article_categories->title)])}}"> {{$article_categories->title}}</a>
+                        @endforeach
+                    </strong>
+
+                    <strong class="d-inline-block mb-2 text-primary">
+                        @foreach($article_cat->tags as $article_tags)
+                            <a class="btn btn-danger btn-sm" href="{{route('tagFilter', ['tag_id'=>$article_tags->id,'slug_cat' =>str_slug($article_tags->title)])}}"> {{$article_tags->title}}</a>
+                            {{--{{$article_tags->title}}--}}
+                        @endforeach
                     </strong>
                     <div class="mb-1 text-muted">{{ $article_cat->author }}</div>
                     <h5 class="mb-0">

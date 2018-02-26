@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\Category;
 use App\Entities\CategoryArticle;
+use App\Entities\Tag;
 use Illuminate\Http\Request;
 use App\Entities\Article;
 //use App\Entities\User;
@@ -44,8 +45,10 @@ class IndexController extends Controller
 //        dump($articles); // Вбудована функція хелпер фреймворка(роздруковує вміст масивів, обєктів і так далі)
         $objCategory = new Category();
 
-        $articles = Article::with('categories')->orderBy('id','desc')->paginate(4);
+        $articles = Article::with('categories','tags')->orderBy('id','desc')->paginate(4);
         $categories = $objCategory->select('id','title')->get();
+
+
         return view('home_page')->with(['header'=>$this->header,
                                           'message'=>$this->message,
                                           'content'=>$this->content,
@@ -64,6 +67,8 @@ class IndexController extends Controller
         $categories = $objCategory1->select('id','title')->get();
 
         $category_of_news = $objarticle->categories;    //відповідні категорій статті
+        $tag_of_news = $objarticle->tags;    //відповідні категорій статті
+
 
 //        $article = Article::select('id','title','full_description','created_at')->where('id',$id)->first();
 //        dump($article);
@@ -71,6 +76,7 @@ class IndexController extends Controller
                                                     'content'=>$this->content,
                                                     'article'=>$objarticle,
                                                     'category_of_news'=>$category_of_news,
+                                                    'tag_of_news'=>$tag_of_news,
                                                     'categories'=>$categories
                                                         ]); //предаємо декілька зміних черезмасив [ключ => зміна]
                                                                              // в resources-> views-> article-content.blade.php
@@ -94,5 +100,20 @@ class IndexController extends Controller
 
         return view('art_by_cat')->with(['articles_cat'=>$articles_cat,
                                                 'categories'=>$categories]);
+    }
+//
+    public function find_art_by_tag($tag_id, $tag_slug)
+    {
+        $articles_cat = Tag::with('articles')->where('id',$tag_id )->get();
+
+
+//        dd($articles_cat);
+
+
+        $objCategory1 = new Category();
+        $categories = $objCategory1->select('id','title')->get();
+
+        return view('art_by_cat')->with(['articles_cat'=>$articles_cat,
+            'categories'=>$categories]);
     }
 }

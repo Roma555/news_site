@@ -27,6 +27,12 @@
                         @foreach($category_of_news as $category_of_new)
                     <a class="btn btn-sm btn-outline-secondary" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{ $category_of_new->title}}</a>
                         @endforeach
+
+                    <strong class="d-inline-block mb-2 text-primary">
+                        @foreach( $tag_of_news as $tag_of_new)
+                            <a class="btn btn-danger btn-sm" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{$tag_of_new->title}}</a>
+                        @endforeach
+                    </strong>
                 </p>
             </div>
         @endif

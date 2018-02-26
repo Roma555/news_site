@@ -251,6 +251,11 @@
                             <a class="btn btn-sm btn-outline-secondary" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{ $category_of_new->title}}</a>
                         @endforeach
                     </strong>
+                    <strong class="d-inline-block mb-2 text-primary">
+                    @foreach( $article->tags as $tag_of_news)
+                        <a class="btn btn-danger btn-sm" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{$tag_of_news->title}}</a>
+                    @endforeach
+                    </strong>
                     <div class="mb-1 text-muted">{{ $article->author }}</div>
                     <h5 class="mb-0">
                         <a class="text-dark" href="#">{{ $article->title }}</a>  {{--отримуєм доступ до ячейки title таблиці article--}}

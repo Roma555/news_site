@@ -15,6 +15,7 @@
 Route::get('/', 'IndexController@index')->name('home');   // Голоана сторінка сайту новин
 Route::get('article/{id}/{slug}', 'IndexController@show')->name('articleShow');   // Сторінка з новиною(динамічна звязка з новиною через id)
 Route::get('category/{id_cat}/{slug_cat}', 'IndexController@find_by_cat')->name('categoryFilter'); // Сторінка з новинами вибраної категорії
+Route::get('tag/{tag_id}/{tag_slug}', 'IndexController@find_art_by_tag')->name('tagFilter'); // Сторінка з новинами вибраної категорії
 //********************************************************************************************************************//
 //Група гостів (не зареєстрованих користувачів):
 Route::group(['middleware' => 'guest'],function(){  //встроєний в ларавел middleware який перевіряє авторизований користувач чи ні;
