@@ -4,30 +4,30 @@
     <!-- ======================================= Slider/BigImagine =================================================== -->
     <div class="container">
         <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+            {{--<div class="BigImagineOnArticle">--}}
+                {{--<img src="{{asset('img/1.jpg')}}">--}}
+            {{--</div>--}}
             <div class="col-md-6 px-0">
-                <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-                <p class="lead my-3">Multiple lines of text that form the lede, informing new readers
-                    quickly and efficiently about what's most interesting in this post's contents.</p>
-                <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
+        @if($article)
+                <h1 class="display-4 font-italic">{!! $article->title !!}</h1>   {{--отримуєм доступ до ячейки title таблиці article--}}
             </div>
         </div>
         <!-- ==================================== END Slider/BigImagine ================================================== -->
 
         <!-- ============================================= Content ======================================================= -->
 
-        @if($article)
-
-                        <h3 class="mb-0">
-                            <a class="text-dark" href="#">{!! $article->title !!}</a>  {{--отримуєм доступ до ячейки title таблиці article--}}
-                        </h3>
-                        <div class="mb-1 text-muted">{!! $article->created_at !!}</div>
-                        <p class="card-text mb-auto">{!! $article->full_description !!}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
+        <div class="mb-1 text-muted">Дата публікації: {!! $article->created_at !!}</div>
+        <div class="col-10 pt-1">
+        <p>Категорія(-ї) новини:
+            @foreach($category_of_news as $category_of_new)
+                <a class="btn btn-sm btn-outline-secondary" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{ $category_of_new->title}}</a>
+            @endforeach
+        </p>
+        </div>
+        <p class="card-text mb-auto">{!! $article->full_description !!}</p> <br><br> {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
             <div class="col-10 pt-1">
-                <p>Категорія(-ї) новини:
-                        @foreach($category_of_news as $category_of_new)
-                    <a class="btn btn-sm btn-outline-secondary" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{ $category_of_new->title}}</a>
-                        @endforeach
 
+                <p>Тег(-и):
                     <strong class="d-inline-block mb-2 text-primary">
                         @foreach( $tag_of_news as $tag_of_new)
                             <a class="btn btn-danger btn-sm" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{$tag_of_new->title}}</a>
