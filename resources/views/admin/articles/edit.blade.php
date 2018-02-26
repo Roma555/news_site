@@ -25,6 +25,13 @@
 
             <p> Введіть ключові слова: <br><input type="text" name="keywords" value="{{$article->keywords}}" class="form-control" required></p>
             <button type="submit" class="btn btn-success" style="cursor: pointer; float: right;">Редагувати</button>
+
+
+            <p> Вибір тегу(-ів): <br><select name="tags[]" class="form-control" multiple >
+                    @foreach($tags as $tag)
+                        <option value="{{$tag->id}}" @if(in_array($tag->id, $arrTags)) selected @endif>{{$tag->title}}</option>
+                    @endforeach
+                </select></p>
             <br><br><br>
         </form>
     </main>

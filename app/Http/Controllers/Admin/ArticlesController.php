@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Entities\Article;
 use App\Entities\Category;
 use App\Entities\CategoryArticle;
+use App\Entities\Tag;
+use App\Entities\TagArticle;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,13 +25,18 @@ class ArticlesController extends Controller
     {
         $objCategory = new Category();
         $categories = $objCategory ->get();
-        return view('admin.articles.add',['categories'=>$categories]);
+
+        $objTag = new Tag();
+        $tags = $objTag ->get();
+        return view('admin.articles.add',['categories'=>$categories,
+                                                'tags'=>$tags]);
     }
 //====================================================================================================================//
     public function addRequestArticle(ArticleRequest $request)
     {
         $objArticle = new Article();
         $objCategoryArticle = new CategoryArticle();
+        $objTagArticle = new TagArticle();
 
         $full_description = $request->input('full_description') ?? null;
         $keywords = $request->input('keywords') ?? null;                    //++++++++++
@@ -43,10 +50,17 @@ class ArticlesController extends Controller
 
 
         if($objArticle){
-            foreach ($request->input('categories') as $category_id){
+            foreach ($request->input('categories') as $category_id) {
                 $category_id = (int)$category_id;
                 $objCategoryArticle = $objCategoryArticle->create([
-                    'category_id'    =>  $category_id,
+                    'category_id' => $category_id,
+                    'article_id' => $objArticle->id
+                ]);
+            }
+            foreach ($request->input('tags') as $tag_id){
+                $tag_id = (int)$tag_id;
+                $objTagArticle = $objTagArticle->create([
+                    'tag_id'         =>  $tag_id,
                     'article_id'     =>  $objArticle->id
                 ]);
             }
@@ -60,22 +74,35 @@ class ArticlesController extends Controller
     {
         $objCategory = new Category();
         $categories = $objCategory ->get();
+
+        $objTag = new Tag();
+        $tags = $objTag ->get();
+
+
         $objArticle = Article::find($id);
         if(!$objArticle){
             return abort('404');
         }
 
         $mainCategories = $objArticle -> categories;
+        $mainTags = $objArticle -> tags;
         $arrCategories = [];
+        $arrTags = [];
         foreach($mainCategories as $category){
             $arrCategories[] = $category->id;
         }
+        foreach($mainTags as $tag){
+            $arrTags[] = $tag->id;
+        }
+
 //        dd($arrCategories);
 
         return view('admin.articles.edit',[
             'categories'      => $categories,
             'article'         => $objArticle,
-            'arrCategories'  => $arrCategories
+            'arrCategories'   => $arrCategories,
+            'tags'            => $tags,
+            'arrTags'         => $arrTags
         ]);
     }
 
@@ -97,9 +124,15 @@ class ArticlesController extends Controller
         if($objArticle->save()){
             //Обновляэмо прив'язку категорій
             $objArticleCategory = new CategoryArticle();
+            $objArticleTag = new TagArticle();
+
             $objArticleCategory->where('article_id',$objArticle->id)->delete();   //видаляємо всі записи в таблиці category_articles в яких article_id збігається із id статі яку ми редагуєм
+            $objArticleTag->where('article_id',$objArticle->id)->delete();   //видаляємо всі записи в таблиці category_articles в яких article_id збігається із id статі яку ми редагуєм
 
             $arrCategories = $request->input('categories');   //отримуємо масив всіх категорій 'categories' з edit.blade.php
+            $arrTags = $request->input('tags');   //отримуємо масив всіх категорій 'categories' з edit.blade.php
+
+
             if(is_array($arrCategories)){                          // перевірка чи то масив
                 foreach ($arrCategories as $category){
                     $objArticleCategory->create([
@@ -108,6 +141,15 @@ class ArticlesController extends Controller
                     ]);
                 }
             }
+            if(is_array($arrTags)){                          // перевірка чи то масив
+                foreach ($arrTags as $tag){
+                    $objArticleTag->create([
+                        'tag_id' => $tag,
+                        'article_id'  => $objArticle->id
+                    ]);
+                }
+            }
+
             return redirect()->route('articles')->with('success','Новина успішно відредагована');
         }
 
@@ -116,12 +158,11 @@ class ArticlesController extends Controller
 //====================================================================================================================//
     public function deleteArticle(Request $request)
     {
-        if($request->ajax()){
+
+        if($request->ajax()) {
             $id = (int)$request->input('id');
-            $objCategory = new Article();
-
-            $objCategory->where('id',$id)->delete();
-
+            $objArticle = new Article();
+            $objArticle->where('id', $id)->delete();
             echo "success";
         }
 

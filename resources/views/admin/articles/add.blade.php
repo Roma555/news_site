@@ -20,6 +20,11 @@
             <p> Короткий опис новини: <br><textarea name="short_description" class="form-control"></textarea></p>
             <p> Повний опис новини: <br><textarea name="full_description" class="form-control"></textarea></p>
             <p> Введіть ключові слова: <br><input type="text" name="keywords" class="form-control" required></p>
+            <p> Вибір тегу(ів): <br><select name="tags[]" class="form-control" multiple >
+                @foreach($tags as $tag)
+                    <option value="{{$tag->id}}">{{$tag->title}}</option>
+                @endforeach
+            </select></p>
             {{--<p> Виберіть зображення: <br><input type="file" name="image"></p>--}}
             <button type="submit" class="btn btn-success" style="cursor: pointer; float: right;">Додати</button>
             <br><br><br>
