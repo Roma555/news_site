@@ -226,16 +226,6 @@
     </div>
 </div>
 <br>
-{{--<div class="container">--}}
-    {{--<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">--}}
-        {{--<div class="col-md-6 px-0">--}}
-            {{--<h1 class="display-4 font-italic">Title of a longer featured blog post</h1>--}}
-            {{--<p class="lead my-3">Multiple lines of text that form the lede, informing new readers--}}
-                {{--quickly and efficiently about what's most interesting in this post's contents.</p>--}}
-            {{--<p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
 <!-- ==================================== END Slider/BigImagine ================================================== -->
 
 <!-- ============================================= Content ======================================================= -->
@@ -256,21 +246,22 @@
                     <strong class="d-inline-block mb-2 text-primary">
 
                     @foreach( $article->tags as $tag_of_news)
-                        <a class="btn btn-danger btn-sm" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{$tag_of_news->title}}</a>
+                        <a class="btn btn-danger btn-sm" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{ $tag_of_news->title}}</a>
                     @endforeach
                     </strong>
-                    <div class="mb-1 text-muted">{{ $article->author }}</div>
+                    <div class="mb-1 text-muted">{{ str_limit($article->author,35) }}</div>
                     <h5 class="mb-0">
-                        <a class="text-dark" href="{{ route('articleShow',['id'=>$article->id,'slug' =>str_slug($article->title)]) }}">{{ $article->title }}</a>  {{--отримуєм доступ до ячейки title таблиці article--}}
+                        <a class="text-dark" href="{{ route('articleShow',['id'=>$article->id,'slug' =>str_slug($article->title)]) }}">{{ str_limit($article->title,40) }}</a>  {{--отримуєм доступ до ячейки title таблиці article--}}
                     </h5>
                     <div class="mb-1 text-muted">{{ $article->created_at->format('d-m-Y H:i') }}</div>
-                    <p class="card-text mb-auto">{!! $article->short_description !!}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
+                    <p class="card-text mb-auto">{!! str_limit($article->short_description ,32) !!}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
                     <a href="{{ route('articleShow',['id'=>$article->id,'slug' =>str_slug($article->title)]) }}">Продовжити читати...</a>
                 </div>
-                <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" src="img/1234.jpg" alt="Card image cap">
+                <div class="card-imagine">
+                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" src="img/1234.jpg" alt="Card image cap">
+                </div>
             </div>
         </div>
-        {{--data-src="holder.js/200x250?theme=thumb"--}}
     @endforeach
     </div>
     <div class="text-center">

@@ -161,8 +161,20 @@ class ArticlesController extends Controller
 
         if($request->ajax()) {
             $id = (int)$request->input('id');
+
             $objArticle = new Article();
+            $objArticleCategory = new CategoryArticle();
+            $objArticleTag = new TagArticle();
+
+            $objArticlefind = Article::find($id);
+            if(!$objArticlefind){
+                return abort('404');
+            }
+
             $objArticle->where('id', $id)->delete();
+            $objArticleCategory->where('article_id',$objArticlefind->id)->delete();   //видаляємо всі записи в таблиці category_articles в яких article_id збігається із id статі яку ми редагуєм
+            $objArticleTag->where('article_id',$objArticlefind->id)->delete();
+
             echo "success";
         }
 

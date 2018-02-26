@@ -24,28 +24,8 @@ class IndexController extends Controller
     }
     //
     public function  index(){
-        //return 'hello World cherez controller';
-        //$message = 'helo world cherez zminu';
-        //return view('page1')->with('message',$message); //предаємо зміну message в resources-> views-> page1.blade.php
-//        return view('page1')->with(['header'=>$header,
-//                                    'message'=>$message,
-//                                    'content'=>$content]); //предаємо декілька зміних черезмасив [ключ => зміна]
-//                                                           // в resources-> views-> page1.blade.php
-//        $header = "Daily Planet";
-//        $message = 'Hello World!!!!';
-//        $content = 'It*s ukrainian magazine with fashion week';
-//        $articles = Article::all(); //звертаємся до класу Article в моделях і викликаємо статичний метод all() який
-//                                    // повертає вибірку всіх записів в таблиці з якою працює дана модель Article
-
-//        $articles = Article::select('id','title','short_description')->get(); //звертаємся до класу Article в моделях і викликаємо
-                                                                 //метод конструктора запитів select('назва_поля','','')
-                                                                 //який вказує які елементи(поля) будуть вибрані з таблиці
-                                                                 //і метод get() який завершує формування запиту(цей
-                                                                 //метод також повертає колекцію моделей вибраних елементів)
-//        dump($articles); // Вбудована функція хелпер фреймворка(роздруковує вміст масивів, обєктів і так далі)
         $objCategory = new Category();
-
-        $articles = Article::with('categories','tags')->orderBy('id','desc')->paginate(4);
+        $articles = Article::with('categories','tags')->orderBy('id','desc')->paginate(6);
         $categories = $objCategory->select('id','title')->get();
 
 

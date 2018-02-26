@@ -14,3 +14,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
     }
 }
+
+//class ArticlesSeeder extends Seeder{
+//
+//}
