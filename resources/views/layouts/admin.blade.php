@@ -68,9 +68,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{!! route('tags') !!}">
                             <span data-feather="bar-chart-2"></span>
-                            Коментарії
+                            Теги
                         </a>
                     </li>
                 </ul>

@@ -20,7 +20,6 @@
 articles:
 	id;                                   [increments]
 	title;                                [string]
-	description;                          [text]
 	short_description;                    [text]
 	full_description;                     [text]
 +	keywords;                             [string]
@@ -29,9 +28,23 @@ articles:
 	timestamp(дата зміни/створення)       [timestamps]
 ==========================================================================
 (список стетей з декількома категоріями)[один-до-багатьох]
-article_categories:
+category_articles:
 	id;                                   [increments]
 	category_id;                          [integer]
 	article_id;                           [integer]
 	timestamp(дата зміни/створення)       [timestamps]
 ==========================================================================
+(список тегів)
+tags:
+	id;                                   [increments]
+	title;                                [string]
+	description;                          [text]
+	timestamp(дата зміни/створення)       [timestamps]
+==========================================================================
+(список тегів)
+tag_articles:
+	id;                                   [increments]
+	tag_id;                               [integer]
+	article_id;                           [integer]
+	timestamp(дата зміни/створення)       [timestamps]
+=========================================================================

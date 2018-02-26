@@ -19,8 +19,8 @@
                 <div class="card-body d-flex flex-column align-items-start">
                     <strong class="d-inline-block mb-2 text-primary">
                         <a class="btn btn-sm btn-outline-secondary" href="{{route('categoryFilter', ['id_cat'=>$article1_cat->id,'slug_cat' =>str_slug($article1_cat->title)])}}">{{$article1_cat->title}}</a>
-
-                        {{$article1_cat->title}}World</strong>
+                        {{--{{$article1_cat->title}}World--}}
+                    </strong>
                     <div class="mb-1 text-muted">{{ $article_cat->author }}</div>
                     <h5 class="mb-0">
                         <a class="text-dark" href="#">{{ $article_cat->title }}</a>

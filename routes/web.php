@@ -58,5 +58,17 @@ Route::group(['middleware' => 'auth'],function(){  //встроєний в ла�
 
         /********************************         Users           *****************************************/
         Route::get('/users', 'Admin\UsersController@index')->name('users');   // Сторінка перегляду користувачів в адмінці;
+
+        /********************************         Tags           *****************************************/
+        Route::get('/tags', 'Admin\TagsController@index')->name('tags'); // Сторінка перегляду тегів в адмінці;
+
+        Route::get('/tags/add', 'Admin\TagsController@addTag')->name('tags.add'); // Сторінка адміна
+        Route::post('/tags/add', 'Admin\TagsController@addRequestTag');               // додачі новини;
+
+        Route::get('/tags/edit/{id}', 'Admin\TagsController@editTag')->where('id','\d+')->name('tags.edit'); // Сторінка адміна
+        Route::post('/tags/edit/{id}', 'Admin\TagsController@editRequestTag')->where('id','\d+');
+
+        Route::delete('/tags/delete', 'Admin\TagsController@deleteTag')->name('tags.delete'); // Сторінка адміна видалення новини
+
     });
 });
