@@ -16,6 +16,10 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+
+    <!-- Підключення CKEditor для тексареа  -->
+    <script src="{{ asset('/js/vendor/ckeditor_full/ckeditor.js') }}" type="text/javascript" charset="utf-8" ></script>
+
 </head>
 
 <body>
@@ -124,6 +128,13 @@
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 <script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
+
+<!-- Підключення CKEditor для тексареа  -->
+<script>
+    var editor = CKEDITOR.replace( 'editor1' );
+    var editor = CKEDITOR.replace( 'editor2' );
+</script>
+
 @yield('js')
 @include('inc.messages')
 

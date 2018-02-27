@@ -7,7 +7,7 @@
     <meta name="author" content="Roma Iliushyk">
     <link rel="icon" href="{{ asset('favicon.ico') }}">
 
-    <title>News Site</title>
+    <title>{!! $name_of_site !!}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -23,9 +23,6 @@
 <div class="container">
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
-            {{--<div class="col-4 pt-1">--}}
-                {{--<a class="text-muted" href="#">Підписатися</a>                        <!-- підписатися -->--}}
-            {{--</div>--}}
             <div class="col-4 pt-1">
                 @if(Auth::check())
                     <a class="btn btn-sm btn-outline-secondary" href="{{asset('/my/account')}}">Перейти в кабінет</a>
@@ -34,7 +31,7 @@
                 @endif
             </div>
             <div class="col-4 text-center">
-                <a class="blog-header-logo text-dark" href="{{asset('/')}}">RomaNews</a>               <!-- Name of News Portall -->
+                <a class="blog-header-logo text-dark" href="{{asset('/')}}">{!! $name_of_site !!}</a> <!-- Name of News Portall -->
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <a class="text-muted" href="#">
@@ -96,7 +93,7 @@
 <!-- ============================================================================================================ -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="{{asset('js/vendor/jquery-slim.min.js')}}"><\/script>')</script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/holder.min.js') }}"></script>

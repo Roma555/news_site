@@ -19,9 +19,9 @@
             <p> Введіть ім'я авторв: <br><input type="text" name="author" value="{{$article->author}}" class="form-control" required></p>
 
             <p> Короткий опис новини:
-                <br><textarea name="short_description" class="form-control">{!! $article->short_description !!}</textarea></p>
+                <br><textarea name="short_description" id="editor1" class="form-control">{!! $article->short_description !!}</textarea></p>
             <p> Повний опис новини:
-                <br><textarea name="full_description" class="form-control">{!! $article->full_description !!}</textarea></p>
+                <br><textarea name="full_description"  id="editor2" class="form-control">{!! $article->full_description !!}</textarea></p>
 
             <p> Введіть ключові слова: <br><input type="text" name="keywords" value="{{$article->keywords}}" class="form-control" required></p>
             <button type="submit" class="btn btn-success" style="cursor: pointer; float: right;">Редагувати</button>
