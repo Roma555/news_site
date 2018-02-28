@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('short_description');
             $table->text('full_description');
+            $table->string('news_imagine')->default('default.jpg');
             $table->string('keywords');
             $table->string('author')->nullable();
             $table->timestamps();

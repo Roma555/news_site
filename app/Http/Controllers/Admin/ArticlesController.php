@@ -10,6 +10,8 @@ use App\Entities\TagArticle;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
+
 
 class ArticlesController extends Controller
 {
@@ -38,13 +40,24 @@ class ArticlesController extends Controller
         $objCategoryArticle = new CategoryArticle();
         $objTagArticle = new TagArticle();
 
+        if($request->hasFile('news_imagine')) {
+            $image = $request->file('news_imagine');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location_sm_img = public_path('img/small/' . $filename);
+            $location_bg_img = public_path('img/big/' . $filename);
+            Image::make($image)->resize(200, 250)->save($location_sm_img);
+            Image::make($image)->resize(800, 600)->save($location_bg_img);
+        }else{$filename='default.jpg';}
+
+
         $full_description = $request->input('full_description') ?? null;
-        $keywords = $request->input('keywords') ?? null;                    //++++++++++
+        $keywords = $request->input('keywords') ?? null;
         $objArticle = $objArticle->create([
             'title'             => $request->input('title'),
             'short_description' => $request->input('short_description'),
             'full_description'  => $full_description,
-            'keywords'          => $keywords,                                     //++++++
+            'news_imagine'      => $filename,
+            'keywords'          => $keywords,
             'author'            => $request->input('author')
         ]);
 

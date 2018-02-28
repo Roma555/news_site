@@ -17,6 +17,7 @@ class Article extends Model
         'author',
         'short_description',
         'full_description',
+        'news_imagine',
         'keywords'
     ];
 

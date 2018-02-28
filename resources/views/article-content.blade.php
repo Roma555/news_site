@@ -13,7 +13,8 @@
             </div>
         </div>
         <!-- ==================================== END Slider/BigImagine ================================================== -->
-
+        <div><img src="{{asset('img/small') .'/'. $article->news_imagine}}"></div>
+        <div><img src="{{asset('img/big') .'/'. $article->news_imagine}}"></div>
         <!-- ============================================= Content ======================================================= -->
 
         <div class="mb-1 text-muted">Дата публікації: {!! $article->created_at !!}</div>
