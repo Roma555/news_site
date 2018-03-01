@@ -206,6 +206,12 @@ class ArticlesController extends Controller
                 return abort('404');
             }
 
+            $filename = $objArticlefind->news_imagine;
+            if(strcmp($filename,"default.jpg")!==0){
+                //Видаляємо стару картинку
+                Storage::delete('small/'.$filename);
+                Storage::delete('big/'.$filename);
+            }
             $objArticle->where('id', $id)->delete();
             $objArticleCategory->where('article_id',$objArticlefind->id)->delete();   //видаляємо всі записи в таблиці category_articles в яких article_id збігається із id статі яку ми редагуєм
             $objArticleTag->where('article_id',$objArticlefind->id)->delete();
