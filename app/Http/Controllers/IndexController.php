@@ -19,11 +19,13 @@ class IndexController extends Controller
         $this->name_of_site = "RomaNews";
     }
     //
-    public function  index(){
+    public function  index(Request $request){
+        $s = $request->input('s');
+
         $objCategory = new Category();                                //Об*єкт категорій
         $categories = $objCategory->select('id','title')->get();      //вибираємо всі записи таблиці категорії
 
-        $articles = Article::with('categories','tags')->orderBy('id','desc')->paginate(6);
+        $articles = Article::with('categories','tags')->search($s)->orderBy('id','desc')->paginate(6);
 
         return view('home_page')->with(['name_of_site'=>$this->name_of_site,
                                               'articles'=>$articles,

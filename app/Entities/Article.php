@@ -43,4 +43,10 @@ class Article extends Model
         //зв*зок багато до багатьох (модель з якою звязуєм, таблиця через яку ми звізуєм, зовнішній ключ(ключ моделі не відноситься до моделі з якою ми звязуєм),
         //внутрішній ключ(не відноситься до моделі яку ми звязуєм))
     }
+
+    public function scopeSearch($query,$s){
+        return $query->where('title', 'like', '%' .$s. '%')
+            ->orWhere('full_description', 'like', '%' .$s. '%')->
+            orWhere('keywords', 'like', '%' .$s. '%');
+    }
 }
