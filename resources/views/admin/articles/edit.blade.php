@@ -23,7 +23,7 @@
             <p> Повний опис новини:
                 <br><textarea name="full_description"  id="editor2" class="form-control">{!! $article->full_description !!}</textarea></p>
 
-            <p> Виберіть забраження новини: <br><input type="file" name="news_imagine" class="form-control" ></p>
+            <p> Виберіть забраження новини: <br><input type="file" name="news_imagine" value="{{$article->news_imagine}}" class="form-control" ></p>
             <p><input type="hidden" name="news_imagine" value="Оберіть картинку" class="form-control"></p>
 
             <p> Введіть ключові слова: <br><input type="text" name="keywords" value="{{$article->keywords}}" class="form-control" required></p>

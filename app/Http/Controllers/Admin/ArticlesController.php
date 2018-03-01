@@ -10,6 +10,7 @@ use App\Entities\TagArticle;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 
@@ -133,6 +134,27 @@ class ArticlesController extends Controller
         $objArticle->full_description = $request->input('full_description');
         $objArticle->author = $request->input('author');
         $objArticle->keywords = $request->input('keywords');
+
+        //Додаємо нове фото
+        if($request->hasFile('news_imagine')){
+            $image = $request->file('news_imagine');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location_sm_img = public_path('img/small/' . $filename);
+            $location_bg_img = public_path('img/big/' . $filename);
+            Image::make($image)->resize(200, 250)->save($location_sm_img);
+            Image::make($image)->resize(800, 600)->save($location_bg_img);
+            $oldfilename = $objArticle->news_imagine;
+//            dd($oldfilename);
+            if(strcmp($oldfilename,"default.jpg")!==0){
+                //Видаляємо стару картинку
+                Storage::delete('small/'.$oldfilename);
+                Storage::delete('big/'.$oldfilename);
+            }
+        }else{$filename='default.jpg';}
+
+        //Оновлюємо значення картинки
+        $objArticle->news_imagine = $filename;
+
 
         if($objArticle->save()){
             //Обновляэмо прив'язку категорій
