@@ -246,7 +246,7 @@
                     <strong class="d-inline-block mb-2 text-primary">
 
                     @foreach( $article->tags as $tag_of_news)
-                        <a class="btn btn-danger btn-sm" href="{{route('categoryFilter', ['id_cat'=>$category_of_new->id,'slug_cat' =>str_slug($category_of_new->title)])}}">{{ $tag_of_news->title}}</a>
+                        <a class="btn btn-danger btn-sm" href="{{route('tagFilter', ['tag_id'=>$tag_of_news->id,'slug_cat' =>str_slug($tag_of_news->title)])}}">{{ $tag_of_news->title}}</a>
                     @endforeach
                     </strong>
                     <div class="mb-1 text-muted">{{ str_limit($article->author,35) }}</div>
@@ -254,11 +254,11 @@
                         <a class="text-dark" href="{{ route('articleShow',['id'=>$article->id,'slug' =>str_slug($article->title)]) }}">{{ str_limit($article->title,40) }}</a>  {{--отримуєм доступ до ячейки title таблиці article--}}
                     </h5>
                     <div class="mb-1 text-muted">{{ $article->created_at->format('d-m-Y H:i') }}</div>
-                    <p class="card-text mb-auto">{!! str_limit($article->short_description ,32) !!}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
+                    <p class="card-text mb-auto">{{ str_limit($article->short_description ,32) }}</p>  {{--те саме що й зверху тыльки !! знымають екранування з тексту--}}
                     <a href="{{ route('articleShow',['id'=>$article->id,'slug' =>str_slug($article->title)]) }}">Продовжити читати...</a>
                 </div>
                 <div class="card-imagine">
-                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" src="img/1234.jpg" alt="Card image cap">
+                    <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" src="{{asset('img/small') .'/'. $article->news_imagine}}" alt="Card image cap">
                 </div>
             </div>
         </div>

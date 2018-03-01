@@ -6,6 +6,7 @@
 {{--<div class="container">--}}
 <div class="container">
     <div class="row mb-2 ">
+
     @foreach($articles_cat as $article1_cat)
             {{--{{$article1_cat}}--}}
             @foreach($article1_cat->articles as $article_cat)
@@ -29,10 +30,10 @@
                         <a class="text-dark" href="#">{{ str_limit($article_cat->title,40) }}</a>
                     </h5>
                     <div class="mb-1 text-muted">{{ $article_cat->created_at->format('d-m-Y H:i') }}</div>
-                    <p class="card-text mb-auto">{!! str_limit($article_cat->short_description ,32) !!}</p>
+                    <p class="card-text mb-auto">{{ str_limit($article_cat->short_description ,32) }}</p>
                     <a href="{{ route('articleShow',['id'=>$article_cat->id,'slug' =>str_slug($article_cat->title)]) }}">Продовжити читати...</a>
                 </div>
-                <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
+                <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb" src="{{asset('img/small') .'/'. $article_cat->news_imagine}}" alt="Card image cap">
             </div>
         </div>
             @endforeach

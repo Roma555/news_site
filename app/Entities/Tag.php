@@ -24,7 +24,7 @@ class Tag extends Model
 
     public function articles()
     {
-        return $this->belongsToMany(Tag::class, 'tag_articles', 'tag_id',
+        return $this->belongsToMany(Article::class, 'tag_articles', 'tag_id',
             'article_id');
         //зв*зок багато до багатьох (модель з якою звязуєм, таблиця через яку ми звізуєм, зовнішній ключ(ключ моделі не відноситься до моделі з якою ми звязуєм),
         //внутрішній ключ(не відноситься до моделі яку ми звязуєм))

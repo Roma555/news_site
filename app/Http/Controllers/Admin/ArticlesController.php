@@ -47,7 +47,7 @@ class ArticlesController extends Controller
             $location_sm_img = public_path('img/small/' . $filename);
             $location_bg_img = public_path('img/big/' . $filename);
             Image::make($image)->resize(200, 250)->save($location_sm_img);
-            Image::make($image)->resize(800, 600)->save($location_bg_img);
+            Image::make($image)->resize(1000, 400)->save($location_bg_img);
         }else{$filename='default.jpg';}
 
 
@@ -142,7 +142,7 @@ class ArticlesController extends Controller
             $location_sm_img = public_path('img/small/' . $filename);
             $location_bg_img = public_path('img/big/' . $filename);
             Image::make($image)->resize(200, 250)->save($location_sm_img);
-            Image::make($image)->resize(800, 600)->save($location_bg_img);
+            Image::make($image)->resize(1000, 400)->save($location_bg_img);
             $oldfilename = $objArticle->news_imagine;
 //            dd($oldfilename);
             if(strcmp($oldfilename,"default.jpg")!==0){

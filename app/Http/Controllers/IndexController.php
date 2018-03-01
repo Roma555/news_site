@@ -76,6 +76,7 @@ class IndexController extends Controller
     {
         $articles_cat = Tag::with('articles')->where('id',$tag_id )->get();
 
+
 //        dd($articles_cat);
 
         $objCategory1 = new Category();
